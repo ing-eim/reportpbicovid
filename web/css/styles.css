@@ -30,3 +30,33 @@ border-radius: 0.5rem;
     margin-left: 50%;
     margin-right: 50%;
 }
+
+.msg{
+    text-align: center;
+    font-size: 10pt;
+    color: red;
+    font-style:italic;
+}
+
+#panelSup{
+    font-style: italic;
+    font-size: 12pt;
+    font-weight: bold;
+    background-color: #ced4da;
+}
+.title_sis{
+    font-family: Arial;    
+    font-size: 18pt;
+    font-weight: bold;
+    background-color: #030567;
+    color:#fff;
+    text-align: center;
+}
+.reloj_s{
+     font-family: Arial;    
+    font-size: 12pt;
+    font-weight: bold;    
+    color:#000;
+    text-align: right;
+    
+}

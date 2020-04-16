@@ -5,11 +5,11 @@
  */
 package pbi.model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import pbi.base.dbConnect;
+import pbi.base.JCGlobals;
 /**
  *
  * @author LALO-DOCIZ
@@ -17,10 +17,19 @@ import pbi.base.dbConnect;
 public class validation {
     private String Us;
     private String pwd;
+    private String ip;
+    private String host;
+    private String navigator;
     private boolean Session;
-    public validation(String us, String pwd){
+    
+    public validation(String us, String pwd,String ip, String host,String navigator){
         this.Us = us;
         this.pwd = pwd;
+        
+        this.ip = ip;
+        this.host = host;
+        this.navigator = navigator;
+        
         if(ValidaUsuario()){
            this.SetSession(true);
         }else{
@@ -37,29 +46,46 @@ public class validation {
         boolean valido = false;
         Connection conn = new dbConnect().getConnection();
         int Numreg = 0;
+        JCGlobals jc = new JCGlobals();
         try{
-            Statement stmt=conn.createStatement();
-
-            String query = "SELECT count(*) FROM " +
-                            "	db_pbi_rhumanos.f_personal a " +
-                            "       join db_pbi_rhumanos.tblRHPersonalesComp b on (a.nIdNumEmp = b.nIdNumEmp)\n" +
-                            " where a.nIdNumEmp = '"+this.Us+"' and a.tRFC = '"+this.pwd+"';";
-            ResultSet rs=stmt.executeQuery(query);
-            
-            while(rs.next()){                
-                Numreg = rs.getInt(1);
-            }
-            System.out.println("1.- Obteniendo Ultimo Registro ... OK");
-            
+            String query = "{call db_pbi_reportcovid19.sp_inicio_session(?,?,?,?,?)}";
+            CallableStatement stmt;
+            stmt = conn.prepareCall(query);
+            stmt.setInt(1,Integer.parseInt(this.Us));/*Es un Parametro de E/S sin ninguna funcion valida al momento*/
+            stmt.setString(2, this.pwd);
+            stmt.setString(3, this.ip);
+            stmt.setString(4, this.host);
+            stmt.setString(5, this.navigator);
+            System.out.println("5.- Sincronizando Registros ... ");
+           
+            boolean hadResults = stmt.execute();
+ 
+            // print headings            
+            System.out.println("================================");
+ 
+            while (hadResults) {
+                ResultSet rs = stmt.getResultSet();
+                while(rs.next()){
+                    Numreg = rs.getInt(1);//person_exists
+                    jc.setid_session(rs.getString("c_v_session_s"));
+                    jc.setpk_i_persona(rs.getString("pk_i_persona"));
+                    jc.setNoEmp(rs.getString("placa"));
+                    jc.setNombreC(rs.getString("NombreC"));
+                    jc.setDescAdsc(rs.getString("adsc"));
+                    jc.setDescPuesto(rs.getString("puesto"));                
+                    jc.setMsg(rs.getString("error_msg"));                
+                }                
+                hadResults = stmt.getMoreResults();
+            } 
+            stmt.close();                        
             conn.close();
         }catch(Exception w){
-            System.out.println("¡ ERROR !"+w.getMessage());
-            
+            System.out.println("¡ ERROR !"+w.getMessage());            
         }        
-        if(Numreg > 0){
-            valido = true;
-        }else{
+        if(jc.getid_session().equals("")|| jc.getid_session().isEmpty()||jc.getid_session().equals("0")){
             valido = false;
+        }else{
+            valido = true;
         }
         return valido;
     }    

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function() { 
+$(document).ready(function() {     
     $("form").submit(function(e){
         e.preventDefault();
         var us = $("#txtempleado").val();
@@ -15,13 +15,17 @@ $(document).ready(function() {
 				us : us,
                                 pwd : pwd
 			},
-			success : function(responseText) {
-				if(JSON.parse(responseText)){
+			success : function(responseText) {                                
+                                var s =  responseText.split("|");
+				if(s[0] === true || s[0]=== "true"){
                                     window.location.href = 'reportedia.jsp';
-                                }
+                                }else{                                    
+                                    //alert(s[1]);
+                                    $("#msg_sal").html(s[1]);
+                                }                              
+                                
 			}
 		});
-   });
-    
+   });    
 });
 

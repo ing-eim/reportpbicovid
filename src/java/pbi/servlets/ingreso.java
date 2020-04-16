@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pbi.model.validation;
+import pbi.model.jcNav;
+import pbi.base.JCGlobals;
+
 /**
  *
  * @author LALO-DOCIZ
@@ -73,18 +76,26 @@ public class ingreso extends HttpServlet {
             throws ServletException, IOException {
             String userName = request.getParameter("us").trim();
             String Pwd = request.getParameter("pwd").trim();
+            String web_cliente_nav = request.getHeader("USER-AGENT");
+            jcNav nav_s = new jcNav();
+            String web_navegador = nav_s.m_TipoNav(web_cliente_nav);
+            String ip = null; // IP del cliente
+            String host = null; // Host del cliente
+
+            ip = request.getRemoteAddr();
+            host = request.getRemoteHost();
 	       
 		if(userName == null || "".equals(userName)){
 			userName = "Guest";
 		}
                 String salida="";
-		if(new validation(userName,Pwd).getSesion()){
-                    salida = "true";
+	
+                if(new validation(userName,Pwd,ip,host,web_navegador).getSesion()){
+                    salida = "true|"+new JCGlobals().getMsg();
                 }else{
-                    salida = "false";
-                }
-		
-               response.setContentType("text/plain");
+                    salida = "false|"+new JCGlobals().getMsg();
+                }		
+               response.setContentType("text/plain");               
                response.getWriter().write(salida);
     }
 

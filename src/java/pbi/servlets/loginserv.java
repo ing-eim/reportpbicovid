@@ -12,12 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import pbi.model.Close_Session;
+import pbi.base.JCGlobals;
 /**
  *
  * @author LALO-DOCIZ
  */
-@WebServlet(name = "loginserv", urlPatterns = {"/loginserv"})
+@WebServlet(name = "loginserv", urlPatterns = {"/view/loginserv"})
 public class loginserv extends HttpServlet {
 
     /**
@@ -72,7 +73,15 @@ public class loginserv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        String salida="";
+        if(new Close_Session(new JCGlobals().getid_session()).Close()){
+            salida = "true|"+new JCGlobals().getMsg();
+        }else{
+            salida = "false|"+new JCGlobals().getMsg();
+        }
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write(salida);        
     }
 
     /**

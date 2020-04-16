@@ -37,6 +37,7 @@
                 </div>
             </form>
             </div>
+            <div class='msg' id='msg_sal'></div>
         </div>
     </body>
 </html>
