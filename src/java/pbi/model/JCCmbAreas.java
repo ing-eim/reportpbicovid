@@ -16,8 +16,12 @@ import pbi.base.JCGlobals;
  */
 public class JCCmbAreas {
     private String combo;
+    private String idAdsc;
+    private String DescPuesto;
     
-    public JCCmbAreas(){
+    public JCCmbAreas(String idAdsc, String DescPuesto){
+        this.idAdsc = idAdsc;
+        this.DescPuesto = DescPuesto;
         this.CargaCmbAreas();
     }
     
@@ -32,8 +36,11 @@ public class JCCmbAreas {
             boolean hadResults = stmt.execute(); 
             // print headings            
             System.out.println("================================");
-            String nIdAdsc = new JCGlobals().getidAdsc();
-            String tDescPuesto = new JCGlobals().getDescPuesto();
+            String nIdAdsc = this.idAdsc;
+            System.out.println(this.idAdsc);
+
+            String tDescPuesto = this.DescPuesto;
+                       System.out.println(this.DescPuesto);
             int tp = 0;
             if(tDescPuesto.equals("DIRECTOR ADMINISTRATIVO")){
                 tp = 0;
@@ -44,8 +51,7 @@ public class JCCmbAreas {
                 cmb= "<option value = '0'> -- Seleccione una Opción -- </option>";
             
             while (hadResults) {
-                ResultSet rs = stmt.getResultSet();
-                
+                ResultSet rs = stmt.getResultSet();                
                 while(rs.next()){
                     if(tp == 0)
                         cmb += "<option value = '"+(rs.getString("nIdAdscripcion")).subSequence(0, 3)+"'>"+rs.getString("tDescAdscripcion")+"</option>";

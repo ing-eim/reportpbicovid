@@ -8,14 +8,13 @@ package pbi.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import pbi.model.validation;
 import pbi.model.jcNav;
 import pbi.base.JCGlobals;
-
+import pbi.base.JCSession;
 /**
  *
  * @author LALO-DOCIZ
@@ -92,6 +91,7 @@ public class ingreso extends HttpServlet {
 	
                 if(new validation(userName,Pwd,ip,host,web_navegador).getSesion()){
                     salida = "true|"+new JCGlobals().getMsg();
+                    new JCSession().CreateSession(request);
                 }else{
                     salida = "false|"+new JCGlobals().getMsg();
                 }		
@@ -104,6 +104,9 @@ public class ingreso extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    
+   
+    
     @Override
     public String getServletInfo() {
         return "Short description";

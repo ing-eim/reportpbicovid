@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pbi.model.JCCmbAreas;
 /**
  *
@@ -73,7 +74,10 @@ public class loadcmbareas extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         String cmb = "";         
-        cmb = new JCCmbAreas().getCombo();
+         HttpSession ms = request.getSession();
+        String idadsc = ms.getAttribute("idadsc").toString();
+        String descpuesto = ms.getAttribute("puesto").toString();
+        cmb = new JCCmbAreas(idadsc,descpuesto).getCombo();
         response.setContentType("text/plain");               
         response.getWriter().write(cmb);
     }

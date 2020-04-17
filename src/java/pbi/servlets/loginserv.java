@@ -12,8 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pbi.model.Close_Session;
 import pbi.base.JCGlobals;
+import pbi.base.JCSession;
 /**
  *
  * @author LALO-DOCIZ
@@ -75,8 +77,13 @@ public class loginserv extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         String salida="";
-        if(new Close_Session(new JCGlobals().getid_session()).Close()){
+        //if(new Close_Session(new JCGlobals().getid_session()).Close()){
+        HttpSession misession= (HttpSession) request.getSession();
+        String c_v_session =  misession.getAttribute("c_v_session").toString();
+        //if(new Close_Session(new JCGlobals().getid_session()).Close()){
+        if(new Close_Session(c_v_session).Close()){
             salida = "true|"+new JCGlobals().getMsg();
+            new JCSession().CloseSession(request);
         }else{
             salida = "false|"+new JCGlobals().getMsg();
         }

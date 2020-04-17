@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import pbi.model.JCSaveReport;
 import pbi.base.JCGlobals;
 /**
@@ -76,7 +77,11 @@ public class savereport extends HttpServlet {
         //processRequest(request, response);
         String d_v_report = request.getParameter("d_v_report").trim();
         String salida="";
-        if(new JCSaveReport(new JCGlobals().getNoEmp(),new JCGlobals().getid_session(),d_v_report).SaveReport()){
+        HttpSession ms = request.getSession();
+        String noEmp = ms.getAttribute("noemp").toString();
+        String id_session = ms.getAttribute("c_v_session").toString();
+        
+        if(new JCSaveReport(noEmp,id_session,d_v_report).SaveReport()){
             salida = "true|"+new JCGlobals().getMsg();
         }else{
             salida = "false|"+new JCGlobals().getMsg();

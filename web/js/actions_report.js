@@ -8,6 +8,12 @@ $(document).ready(function() {
     $("form").submit(function(e){
         e.preventDefault();
         var d_v_report = $("#txtreporte").val();        
+        if(d_v_report.trim() === "" || (d_v_report.trim()).length === 0){
+            alert ("Escriba su reporte por favor");
+            $("#txtreporte").focus();
+            return 0;
+        }else{         
+     
         $.ajax({
 			url : 'savereport',
                         type: 'post',
@@ -26,6 +32,7 @@ $(document).ready(function() {
                                 
 			}
 		});
+            }
    });    
 });
 function loadCmb(){

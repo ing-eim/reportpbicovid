@@ -5,18 +5,19 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="pbi.base.JCGlobals;"%>
+<%@page import="pbi.base.JCSession;"%>
+
 <%
-    if(new JCGlobals().getid_session().equals("0") || new JCGlobals().getid_session().isEmpty()||new JCGlobals().getid_session() == "0" || new JCGlobals().getid_session().equals(""))
+    
+    /*if(new JCGlobals().getid_session().equals("0") || new JCGlobals().getid_session().isEmpty()||new JCGlobals().getid_session() == "0" || new JCGlobals().getid_session().equals(""))*/
+    request.getSession();
+    HttpSession misession= (HttpSession) request.getSession();
+    if(misession.getAttribute("c_v_session").toString().length() == 0)
     {
 %>
-<html>
-    <head></head>  
-    <body>    
-        <div style="width: 100%;height: 100%;background-image: url('../images/ilegal.png')">
-            
-        </div>
-    </body>
-</html>
+<script>
+    window.location = 'lg.jsp';
+</script>
 <%}else{%>
 <!DOCTYPE html>
 <html>
@@ -72,7 +73,7 @@
                             <br/>
                             <label for="txtreporte">Escriba su reporte de Actividades de Hoy</label>
                             <input type="submit" class="btn btn-info" value="Guardar Reporte">
-                            <textarea id="txtreporte" class="form-control" cols="500" rows="20">
+                            <textarea  placeholder="Escriba aqui su Reporte ..." id="txtreporte" class="form-control" cols="500" rows="20" >
                             </textarea>
                             </div>
                         </div>
@@ -103,24 +104,5 @@
                 
             </div>            
         </div>
-            <script>
-                /*window.addEventListener("beforeunload", function (e) {
-                        saveFormData();
-                        (e || window.event).returnValue = null;
-                        return null;
-                });
-                function saveFormData() {
-                    console.log('saved');
-                }*/
-    /*
-    var myEvent = window.attachEvent || window.addEventListener;
-    var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload'; /// make IE7, IE8 compitable
-
-               myEvent(chkevent, function(e) { // For >=IE7, Chrome, Firefox
-                   var confirmationMessage = 'Are you sure to leave the page?';  // a space
-                   (e || window.event).returnValue = confirmationMessage;
-                   return confirmationMessage;
-               });*/
-</script>
 </html>
 <% } %>
