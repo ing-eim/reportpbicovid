@@ -9,7 +9,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import pbi.base.dbConnect;
-
+import pbi.base.JCGlobals;
 /**
  *
  * @author depdes10
@@ -32,12 +32,26 @@ public class JCCmbAreas {
             boolean hadResults = stmt.execute(); 
             // print headings            
             System.out.println("================================");
-            cmb= "<option value = '0'> -- Seleccione una Opción -- </option>";
+            String nIdAdsc = new JCGlobals().getidAdsc();
+            String tDescPuesto = new JCGlobals().getDescPuesto();
+            int tp = 0;
+            if(tDescPuesto.equals("DIRECTOR ADMINISTRATIVO")){
+                tp = 0;
+            }else if(tDescPuesto.equals("SUBDIRECTOR DE AREA")){
+                tp = 1;
+            }
+            if (tp == 0)
+                cmb= "<option value = '0'> -- Seleccione una Opción -- </option>";
+            
             while (hadResults) {
                 ResultSet rs = stmt.getResultSet();
                 
                 while(rs.next()){
-                    cmb += "<option value = '"+(rs.getString("nIdAdscripcion")).subSequence(0, 3)+"'>"+rs.getString("tDescAdscripcion")+"</option>";
+                    if(tp == 0)
+                        cmb += "<option value = '"+(rs.getString("nIdAdscripcion")).subSequence(0, 3)+"'>"+rs.getString("tDescAdscripcion")+"</option>";
+                    else if( tp == 1 && ( (nIdAdsc.subSequence(0,3)).equals((rs.getString("nIdAdscripcion")).subSequence(0, 3)))){
+                        cmb += "<option value = '"+(rs.getString("nIdAdscripcion")).subSequence(0, 3)+"'>"+rs.getString("tDescAdscripcion")+"</option>";
+                    }                        
                 }                
                 hadResults = stmt.getMoreResults();
             } 

@@ -73,7 +73,8 @@ public class validation {
                     jc.setNombreC(rs.getString("NombreC"));
                     jc.setDescAdsc(rs.getString("adsc"));
                     jc.setDescPuesto(rs.getString("puesto"));                
-                    jc.setMsg(rs.getString("error_msg"));                
+                    jc.setMsg(rs.getString("error_msg"));
+                    jc.setidAdsc(rs.getString("nIdAdscripcion"));
                 }                
                 hadResults = stmt.getMoreResults();
             } 

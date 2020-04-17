@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="../css/styles.css"/>
         <link rel="stylesheet" href="../css/pbi_style.css"/>
     </head>
-    <body>
+    <body onbeforeunload="alert('function alrt WORKS !!!!');">
         <div class="container col-sm-4">
             <center>
                 <img src="../images/loginu.png"/>

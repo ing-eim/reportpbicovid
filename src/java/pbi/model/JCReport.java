@@ -27,6 +27,8 @@ public class JCReport {
     
     private void CargaReport(){    
         String table = "";
+        String adsact = "";
+        String adsant = "";
         Connection conn = new dbConnect().getConnection();        
         try{
             String query = "{call db_pbi_reportcovid19.sp_genera_reporte(?,?)}";
@@ -43,7 +45,20 @@ public class JCReport {
             while (hadResults) {
                 ResultSet rs = stmt.getResultSet();                
                 while(rs.next()){
-                    table += "<tr><td>"+rs.getString("DescAdsc")+"</td><td>"+rs.getString("NombreC")+"</td><td><strong>"+rs.getString("fecha_registro")+"</strong><br/>"+rs.getString("reporte")+"</td></tr>";
+                    adsact = (rs.getString("idAdsc")).subSequence(0, 4).toString();
+                    if ( adsact.equals(adsant)){
+                        table += "<tr><td>"+rs.getString("DescAdsc")+"</td>"+
+                                     "<td>"+rs.getString("NombreC")+"</td>"+
+                                     "<td><strong>"+rs.getString("fecha_registro")+"</strong><br/>"+rs.getString("reporte")+"</td>"
+                                + "</tr>";               
+                    }else{
+                        adsant = adsact;
+		        table +="<tr><td colspan ='3' style='text-align:center;background:#909090;color:#fff'>"+rs.getString("DescAdsc")+"</td></tr>"; 
+                        table += Head_Table()+"<tr><td>"+rs.getString("DescAdsc")+"</td>"+
+                                     "<td>"+rs.getString("NombreC")+"</td>"+
+                                     "<td><strong>"+rs.getString("fecha_registro")+"</strong><br/>"+rs.getString("reporte")+"</td>"
+                                + "</tr>";
+                    }
                 }                
                 hadResults = stmt.getMoreResults();
             } 
@@ -55,7 +70,16 @@ public class JCReport {
         }                
         setTable(table);
     }    
-    
+    private String Head_Table(){
+       String h = "";
+       String color1="rgb(238,238,238)";
+       h = "<tr>"+
+		"<td  style='font-size: 8pt;background-color :"+color1+"'><center><font face='verdana'><b>Adscripcion</b></font></center></td>"+
+		"<td  style='font-size: 8pt;background-color :"+color1+"'><center><font face='verdana'><b>Nombre</b></font></center></td>"+
+		"<td  style='font-size: 8pt;background-color :"+color1+"'><center><font face='verdana'><b>Reporte</b></font></center></td>"+
+		"</tr>";
+       return h;
+    }
     private void setTable(String table){
         this.table_report = table;
     }

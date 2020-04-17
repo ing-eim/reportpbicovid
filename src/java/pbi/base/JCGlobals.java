@@ -13,7 +13,7 @@ public class JCGlobals {
     private static String NoEmp;
     private static String pk_i_persona;
     private static String NombreC;
-    //private static String idAdsc;
+    private static String idAdsc;
     private static String DescAdsc;
     private static String DescPuesto;   
     private static String Msg;   
@@ -33,8 +33,8 @@ public class JCGlobals {
     public void setNombreC(String NombreC){ this.NombreC = NombreC;}
     public String getNombreC(){return this.NombreC;}
     
-    /*public void setidAdsc(String idAdsc){ this.idAdsc = idAdsc;}
-    public String getidAdsc(){return this.idAdsc;}*/
+    public void setidAdsc(String idAdsc){ this.idAdsc = idAdsc;}
+    public String getidAdsc(){return this.idAdsc;}
     
     public void setDescAdsc(String DescAdsc){ this.DescAdsc = DescAdsc;}
     public String getDescAdsc(){return this.DescAdsc;}

@@ -57,7 +57,7 @@
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Redactar Informe</a>
-                <%if (new JCGlobals().getDescPuesto().equals("DIRECTOR ADMINISTRATIVO")){%>
+                <%if (new JCGlobals().getDescPuesto().equals("DIRECTOR ADMINISTRATIVO")||new JCGlobals().getDescPuesto().equals("SUBDIRECTOR DE AREA")){%>
                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="loadCmb();">Reporte de Área</a>
                 <%}%>                        
                 <a class="nav-item nav-link" id="nav-contact-tab" onclick ="c_s();" data-toggle="tab" href="#" role="tab" aria-controls="nav-contact" aria-selected="false">Cierre Session</a>
@@ -86,11 +86,11 @@
                         <div class="form-group col-md-4">
                             <label for="txtfechareporte">Fecha de Reporte</label>
                             <input type="date" id="txtfechareport" class="form-control">                            
-                        </div>                        
+                        </div>
                         <div class="form-group col-4">
                             <label for="cmbarea">Área</label>
-                            <select name="cmbarea" id="cmbarea" class="form-control"></select>
-                        </div>                        
+                            <select name="cmbarea" id="cmbarea" class="form-control"></select>                        
+                        </div>                           
                     </div>
                     <div class="row col-10">
                         <div class="form-group">                                                       
@@ -103,5 +103,24 @@
                 
             </div>            
         </div>
+            <script>
+                /*window.addEventListener("beforeunload", function (e) {
+                        saveFormData();
+                        (e || window.event).returnValue = null;
+                        return null;
+                });
+                function saveFormData() {
+                    console.log('saved');
+                }*/
+    /*
+    var myEvent = window.attachEvent || window.addEventListener;
+    var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload'; /// make IE7, IE8 compitable
+
+               myEvent(chkevent, function(e) { // For >=IE7, Chrome, Firefox
+                   var confirmationMessage = 'Are you sure to leave the page?';  // a space
+                   (e || window.event).returnValue = confirmationMessage;
+                   return confirmationMessage;
+               });*/
+</script>
 </html>
 <% } %>
