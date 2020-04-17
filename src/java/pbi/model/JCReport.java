@@ -42,9 +42,11 @@ public class JCReport {
             // print headings            
             System.out.println("================================");
             table= "<table><thead></thead><tbody>";
+            int nrs = 0;
             while (hadResults) {
                 ResultSet rs = stmt.getResultSet();                
                 while(rs.next()){
+                    nrs++;
                     adsact = (rs.getString("idAdsc")).subSequence(0, 4).toString();
                     if ( adsact.equals(adsant)){
                         table += "<tr><td>"+rs.getString("DescAdsc")+"</td>"+
@@ -62,6 +64,9 @@ public class JCReport {
                 }                
                 hadResults = stmt.getMoreResults();
             } 
+            if(nrs == 0){
+               table += "<tr><td  style='font-size: 14pt;background-color :rgb(238,238,238)'><center><font face='verdana'><b> No hay Registros en El dia Seleccionado </b></font></center></td></tr>";
+            }
             table += "</tbody></table>";
             stmt.close();                        
             conn.close();

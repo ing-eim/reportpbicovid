@@ -29,6 +29,7 @@ $(document).ready(function() {
    });    
 });
 function loadCmb(){
+    fijarfecha();
         $.ajax({
 			url : 'loadcmbareas',
                         type: 'post',			
@@ -42,7 +43,6 @@ function loadCmb(){
     function llamareporte(){
         var f = $("#txtfechareport").val();
         var area = $("#cmbarea").val();
-        var opcadm = $("#cmbarea").val();
         if(area == 0 || area == "0"){
             alert ("Debe Seleccionar un elemento ");
             $("#cmbarea").focus();

@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var fechaact;
 function reloj() {
 			//Variables
 			horareal = new Date()
@@ -17,6 +18,19 @@ function reloj() {
                         namedia = valida_dia(ndiaSem);
                         nameMes = valida_Mes(nmes);
                         
+                        comprobardia = new String (ndia);
+			comprobarmes = new String (nmes);
+                        if (comprobardia.length == 1)
+                            nndia = "0" + ndia;
+                        else
+                            nndia = ndia;
+                        
+                        if (comprobarmes.length == 1)
+                            nnmes = "0" + nmes;
+                        else
+                            nnmes = nmes;
+                        
+                        fechaact = nanio+"-"+nnmes+"-"+nndia;
 			//Codigo para evitar que solo se vea un numero en los segundos
 			comprobarsegundo = new String (segundo)
 			if (comprobarsegundo.length == 1)
@@ -31,10 +45,11 @@ function reloj() {
 			hora = "0" + hora
 			// Codigo para mostrar el reloj en pantalla
 			verhora = hora + " : " + minuto + " : " + segundo
-                        verfecha =namedia+" "+ ndia + " de "+ nameMes + " de "+nanio;
+                        verfecha = namedia+" "+ ndia + " de "+ nameMes + " de "+nanio;
 			//document.reloj_javascript.reloj.value = verhora
                         $("#reloj").html(verfecha +" <br> "+ verhora);
-			setTimeout("reloj()",1000);
+			
+                        setTimeout("reloj()",1000);
                         
 		}
                 function valida_dia(ndiaSem){
@@ -108,3 +123,6 @@ function reloj() {
                     }
                     return name_mes;                    
                 }
+function fijarfecha(){
+    $("#txtfechareport").val(fechaact);
+}
