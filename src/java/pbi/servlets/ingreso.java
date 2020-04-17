@@ -75,7 +75,7 @@ public class ingreso extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             String userName = request.getParameter("us").trim();
-            String Pwd = request.getParameter("pwd").trim();
+            String Pwd = (request.getParameter("pwd").trim()).toUpperCase();
             String web_cliente_nav = request.getHeader("USER-AGENT");
             jcNav nav_s = new jcNav();
             String web_navegador = nav_s.m_TipoNav(web_cliente_nav);

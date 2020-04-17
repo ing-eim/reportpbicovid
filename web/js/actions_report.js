@@ -8,7 +8,6 @@ $(document).ready(function() {
     $("form").submit(function(e){
         e.preventDefault();
         var d_v_report = $("#txtreporte").val();        
-        alert(d_v_report);
         $.ajax({
 			url : 'savereport',
                         type: 'post',
@@ -18,7 +17,7 @@ $(document).ready(function() {
 			success : function(responseText) {                                
                                 var s =  responseText.split("|");
 				if(s[0] === true || s[0]=== "true"){
-                                    alert(s[1]);
+                                    alert(s[1]);                                    
                                     $("#txtreporte").val("");
                                     
                                 }else{                                    
