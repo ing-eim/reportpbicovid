@@ -40,7 +40,8 @@
         <div class="title_sis">
             SISTEMA DE REPORTE DE ACTIVIDADES POR CONTINGENCIA
         </div>
-        <div id="panelSup">Bienvenido <br/><%
+        <div id="panelSup">Bienvenido <br/>
+            <%
                 out.println(new JCGlobals().getNoEmp());
                 out.println("  |  ");
                 out.println(new JCGlobals().getNombreC());

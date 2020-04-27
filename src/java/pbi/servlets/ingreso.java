@@ -73,8 +73,14 @@ public class ingreso extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            new JCGlobals().Clear();
+           
             String userName = request.getParameter("us").trim();
             String Pwd = (request.getParameter("pwd").trim()).toUpperCase();
+            
+            System.out.println(userName);
+            System.out.println(Pwd);
+            
             String web_cliente_nav = request.getHeader("USER-AGENT");
             jcNav nav_s = new jcNav();
             String web_navegador = nav_s.m_TipoNav(web_cliente_nav);

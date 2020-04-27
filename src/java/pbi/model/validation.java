@@ -62,7 +62,7 @@ public class validation {
  
             // print headings            
             System.out.println("================================");
- 
+            
             while (hadResults) {
                 ResultSet rs = stmt.getResultSet();
                 while(rs.next()){

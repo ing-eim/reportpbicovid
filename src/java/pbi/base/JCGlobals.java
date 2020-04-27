@@ -19,7 +19,18 @@ public class JCGlobals {
     private static String Msg;   
     
        
-    public JCGlobals(){}
+    public JCGlobals(){
+    }
+    public void Clear(){
+        this.setDescAdsc(null);
+        this.setDescPuesto(null);
+        this.setMsg(null);
+        this.setNoEmp(null);
+        this.setNombreC(null);
+        this.setidAdsc(null);
+        this.setid_session(null);
+        this.setpk_i_persona(null);
+    }
     
     public void setid_session(String id_session){ this.id_session = id_session;}
     public String getid_session(){return this.id_session;}
