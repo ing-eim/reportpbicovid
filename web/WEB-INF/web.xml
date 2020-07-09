@@ -4,9 +4,17 @@
         <servlet-name>ingreso</servlet-name>
         <servlet-class>pbi.servlets.ingreso</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loadreportperson</servlet-name>
+        <servlet-class>pbi.servlets.loadreportperson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ingreso</servlet-name>
         <url-pattern>/view/ingreso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadreportperson</servlet-name>
+        <url-pattern>/view/loadreportperson</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

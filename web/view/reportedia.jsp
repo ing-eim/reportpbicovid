@@ -61,7 +61,8 @@
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Redactar Informe</a>
                 <%if (new JCGlobals().getDescPuesto().equals("DIRECTOR ADMINISTRATIVO")||new JCGlobals().getDescPuesto().equals("SUBDIRECTOR DE AREA")){%>
                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="loadCmb();">Reporte de Área</a>
-                <%}%>                        
+                <%}%>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-historico" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="">Historial</a>
                 <a class="nav-item nav-link" id="nav-contact-tab" onclick ="c_s();" data-toggle="tab" href="#" role="tab" aria-controls="nav-contact" aria-selected="false">Cierre Session</a>
             </div>
         </nav>
@@ -103,7 +104,32 @@
                 <div class="container" id="reportexarea">                    
                 </div>
                 
+            </div>
+            
+                                    <!--              PANEL GENRA REPORTE       -->
+            <div class="tab-pane fade" id="nav-historico" role="tabpanel" aria-labelledby="Mostrar Historico de Reportes">
+                <div class="container">
+                    <div class="row col-10">
+                        <div class="form-group col-md-4">
+                            <label for="txtfec_in_report">Fecha Inicial</label>
+                            <input type="date" id="txtfec_in_report" class="form-control">                            
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="txtfec_fin_report">Fecha Final</label>
+                            <input type="date" id="txtfec_fin_report" class="form-control">                            
+                        </div>
+                    </div>
+                    <div class="row col-10">
+                        <div class="form-group">                                                       
+                            <input type = "button" id="btnGeneraInf" class="form-control btn btn-success" value="Mostrar" onclick ='llamainforme(<%out.print(new JCGlobals().getNoEmp());%>);'>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="container" id="reportepersonal">                    
+                </div>                
             </div>            
+            <!-- ****************************  -->
+            
         </div>
 </html>
 <% } %>

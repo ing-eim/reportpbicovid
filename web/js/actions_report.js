@@ -68,5 +68,26 @@ function loadCmb(){
 			}
 		});        
     
-}
+    }
+    
+     function llamainforme(placa){
+        var fi = $("#txtfec_in_report").val();
+        var ff = $("#txtfec_fin_report").val();        
+        var c_i_placa = placa;
+        
+        $.ajax({
+			url : 'loadreportperson',
+                        type: 'post',			
+                        data: { 
+                            fecha_in :fi,
+                            fecha_fin :ff,
+                            c_i_placa : c_i_placa
+                        },
+			success : function(responseText) {                 
+                                $("#reportepersonal").html();
+                                $("#reportepersonal").html(responseText);
+			}
+		});        
+    
+    }
 

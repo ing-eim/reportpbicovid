@@ -8,6 +8,12 @@ $(document).ready(function() {
         e.preventDefault();
         var us = $("#txtempleado").val();
         var pwd = $("#txtpassword").val();
+        if (pwd.length > 10){
+            $("#msg_sal").html("Longitud del Password debe ser menor a 10 caracteres");
+            $("#txtpassword").focus();
+            return 0;
+        }
+        
         $.ajax({
 			url : 'ingreso',
                         type: 'post',
